@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { authTypes } from '../store/_types';
+
+import { Store } from '../store/index';
+import { authActions } from '../store/_actions/auth.actions';
 
 const LoginScreem = ({ history }) => {
 
+    const { dispatch } = useContext(Store);
 
     const handleSubmit = (e)=> {
         e.preventDefault();
         const lastPath = localStorage.getItem("lastPath") || "/";
+
+        const user = {
+            isAuth: true,
+            name: 'samir pazo',
+            token: ''
+        }
+
+        authActions.login( user, dispatch)
 
         history.replace( lastPath );
     }

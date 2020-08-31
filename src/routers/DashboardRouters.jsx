@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import NavbarApp from '../ui/NavbarApp';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import GifsExpertApp from '../GifExpertApp';
@@ -6,12 +6,17 @@ import FavoriteScreem from '../favorite/FavoriteScreem';
 import LoginScreem from '../auth/LoginScreem';
 import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
+import useCheckAuth from '../auth/hooks/useCheckAuth';
 
 const DashboardRouters = () => {
 
-    //const { state } = useContext();
+    const user = useCheckAuth() || { isAuth: false };
+ 
+    const { isAuth } = user;
+    
+    console.log(isAuth)
 
-    const isAuth = true;
+   // const isAuth = true;
 
     return (
         <>
