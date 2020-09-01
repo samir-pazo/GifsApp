@@ -16,8 +16,7 @@ const getGifs = async( category ) => {
             imageUrl: gif.images?.downsized_medium.url
         }
     ));
-
-    console.log(gifs)
+ 
     return gifs;
 }
  

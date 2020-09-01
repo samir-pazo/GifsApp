@@ -11,13 +11,8 @@ import useCheckAuth from '../auth/hooks/useCheckAuth';
 const DashboardRouters = () => {
 
     const user = useCheckAuth() || { isAuth: false };
- 
     const { isAuth } = user;
-    
-    console.log(isAuth)
-
-   // const isAuth = true;
-
+ 
     return (
         <>
             <NavbarApp />

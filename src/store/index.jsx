@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { authTypes, favoriteTypes } from './_types';
+import { authTypes, favoriteTypes, gifsTypes } from './_types';
 
 export const Store = React.createContext();
 
@@ -9,21 +9,33 @@ const initialState = {
 		name: '',
 		token: ''
 	},
+	categories: ['Dragon Ball'],
     favorites: []
 };
 
 const globalReducer = (state = initialState, action) => {
-		
+ 
 	switch (action.type) {
+
+	case gifsTypes.ADD_CATEGORY:
+		return { ...state, categories: [ action.payload, ...state.categories ] }
+	case gifsTypes.GIFS_LIST :
+		return { ...state, categories: action.payload }
 	case authTypes.SET_SESSION:
 		return { ...state, session: action.payload };
 
 	case authTypes.REMOVE_SESSION:
-		return {...state, session: null}
+		return { ...state, session: {
+			isAuth: false,
+			name: '',
+			token: ''
+		} }
 	
 	case favoriteTypes.ADD_FAVORITE:
-		return { ...state, favorites: state.favorites.concat(action.payload) }
-	
+		if(state.favorites.find(fav => fav.id === action.payload.id)) {
+			return state;
+		}
+		return { ...state, favorites: [ action.payload , ...state.favorites] }	
 	default:
 		return state;
 	}

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import AddCategory from './components/AddCategory';
 import GifGrid from './components/GifGrid';
+import { Store } from './store';
 
 const GifExpertApp = () => {
 
-    const [ categories, setCategories ] = useState(['Dragon Ball']);
+    const { state:{categories} } = useContext(Store);
  
     return (
-        <div>
-            <h2>Gif Expert App</h2>
-            <AddCategory setCategory={ setCategories }/>
+        <div className="pt-5">
+             
+            <AddCategory />
             <hr/>
-            <ul>
+            <div>
                 {
                     categories.map( ( category ) => (
                         <GifGrid 
@@ -19,7 +20,7 @@ const GifExpertApp = () => {
                             category={ category } />
                     ) )
                 }
-            </ul>
+            </div>
         </div>
     )
 }

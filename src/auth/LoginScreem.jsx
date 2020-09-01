@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { authTypes } from '../store/_types';
-
+ 
 import { Store } from '../store/index';
 import { authActions } from '../store/_actions/auth.actions';
 
@@ -14,7 +13,7 @@ const LoginScreem = ({ history }) => {
 
         const user = {
             isAuth: true,
-            name: 'samir pazo',
+            name: 'Samir Pazo Torres',
             token: ''
         }
 
@@ -43,6 +42,7 @@ const LoginScreem = ({ history }) => {
                         />
                 </div>
                 <button className="btn btn-primary block">Ingresar</button>
+                 
             </form>
         </div>
     )

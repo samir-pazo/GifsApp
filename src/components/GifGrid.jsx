@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import GifGrigItem from './GifGrigItem'
 import useFetchGifs from './hooks/useFetchGifs'
+import { Store } from '../store';
 
 const GifGrid = ( { category } ) => {
 
     const { data:gifs, loading} = useFetchGifs( category );
+
+    const { state:{favorites} } = useContext(Store)
 
     return (
         <>
@@ -17,8 +20,9 @@ const GifGrid = ( { category } ) => {
                 gifs.map(( gif ) => (
                     <GifGrigItem 
                         key={gif.id} 
-                        {...gif} />
-                ))
+                        {...gif} 
+                        isFavorite={((!!favorites.find(fav => fav.id === gif.id)) && true)}/>
+                 ))
             }           
             </div>
         </>

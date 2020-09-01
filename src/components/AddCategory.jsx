@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useContext } from 'react'
+ 
+import { gifsActions } from '../store/_actions';
+import { Store } from '../store';
 
-const AddCategory = ({setCategory}) => {
+const AddCategory = () => {
 
+    const { dispatch } = useContext(Store);
     const [ inputValue, setInputValue ] = useState('')
 
     const handleInputChange = (e) => {
@@ -15,7 +18,7 @@ const AddCategory = ({setCategory}) => {
         e.preventDefault();
 
         if( inputValue.trim().length > 2){      
-            setCategory(cats => [ inputValue, ...cats]);
+            gifsActions.addCategory( inputValue, dispatch );
             setInputValue('');
         }
     }
@@ -31,9 +34,6 @@ const AddCategory = ({setCategory}) => {
         </form>
     )
 }
-
-AddCategory.propTypes = {
-    setCategory: PropTypes.func.isRequired
-}
+ 
 
 export default AddCategory

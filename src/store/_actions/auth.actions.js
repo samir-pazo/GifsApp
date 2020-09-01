@@ -11,6 +11,14 @@ const login = ( user, dispatch ) => {
 
 };
 
+const logout = (dispatch) => {
+    localStorage.removeItem('session_app');
+    dispatch({
+        type: authTypes.REMOVE_SESSION
+    })
+}
+
 export const authActions = {
-    login
+    login,
+    logout
 };

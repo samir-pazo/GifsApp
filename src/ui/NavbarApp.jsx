@@ -3,16 +3,17 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import useCheckAuth from '../auth/hooks/useCheckAuth';
 import { Store } from '../store';
+import { authActions } from '../store/_actions';
  
  
 const NavbarApp = () => {
 
-    const aa = useContext(Store);
-    const user = JSON.parse(useCheckAuth())
+    const { dispatch } = useContext(Store);
+    const user = useCheckAuth();
 
 
     const handleLogout = () => {
-
+        authActions.logout( dispatch );
     }
 
     const login = user === null ? (<li className="nav-item"> <Link className="nav-link " to="/login">Login</Link></li>) : 
@@ -27,7 +28,7 @@ const NavbarApp = () => {
 
     return (
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">Gifs</Navbar.Brand>
+            <Link className="navbar-brand" to="/">Gifs</Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
